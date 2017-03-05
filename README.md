@@ -8,13 +8,13 @@ License MIT
 # How to use
 
 * Include this library to your Arduino IDE.
-* Wiring MH-Z19 sensor to your Arduino or ESP-WROOM-02
+* Wiring MH-Z19 sensor to your Arduino or ESP-WROOM-02.
 
     MH-Z19 Vout to Arduino Vin(5V)  
     MH-Z19 GND  to Arduino GND  
     MH-Z19 Tx   to Arduino Digital Pin (Software Serial Rx pin)  # do not connect Arduino Rx pin.  
     MH-Z19 Rx   to Arduino Digital Pin (Software Serial Tx pin)  # do not connect Arduino Tx pin.  
-    other MH-Z19 pins are not using.  
+    other MH-Z19 pins are not used.  
 
 * Read sample source code. It's very simple !
 
@@ -32,19 +32,19 @@ License MIT
   notmal constractor. if you use this constractor, you must begin() function after this constractor.
 
 * MHZ19_Serial(int rx, int tx)  
-  setting rx and tx pin, initialize Software Serial. normally, you use this constractor.
+  setting rx and tx pin, and initialize Software Serial.
 
 ## public function
 
 * void begin(int rx, int tx)  
-  setting rx and tx pin, initialize Software Serial.
+  setting rx and tx pin, and initialize Software Serial.
   
 * void setAutoCalibration(bool autocalib)  
-  MH-Z19 has automatic calibration procedure. If executing automatic calibration, its do zero point judgement
-  The automatic calibration cycle is every 24 hours after powered on and 
+  MH-Z19 has automatic calibration procedure. the MH-Z19 executing automatic calibration, its do zero point(stable gas environment (400ppm)) judgement.
+  The automatic calibration cycle is every 24 hours after powered on.
 
 * void calibrateZero()  
-  execute zero poing calibration. 
+  execute zero point calibration. 
   if you want to execute zero calibration, the MH-Z19 sensor must work in stable gas environment (400ppm) for over 20 minutes and you execute this function.
 
 * void calibrateSpan(int ppm)  
@@ -55,13 +55,13 @@ License MIT
   get co2 ppm.
   
 * int getTemperature()  
-  get temperature (MH-Z10 hiding function?)
+  get temperature (MH-Z10 hiding function?  this function is not support.)
 
 * int getStatus()  
-  get status value (but I don't know what this value is.)
+  get ths MH-Z19 sensor status value (but I don't know what this value is. this function is not support, too.)
 
 * bool isWarming()  
-  check ths MH-Z19 sensor is warming up.
+  check the MH-Z19 sensor is warming up.
 
 # link
 * MH-Z19 Data sheet  
