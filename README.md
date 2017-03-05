@@ -1,5 +1,5 @@
 # MHZ19_Serial 
-Arduino IDE library for operating the MH-Z19 CO2 sensor in ESP-WROOM-02(esp8266) or Arduino
+Arduino IDE library for operating the MH-Z19 CO2 sensor in ESP-WROOM-02(esp8266) or Arduino  
 version 0.2
 
 # Credits and license  
@@ -29,7 +29,7 @@ License MIT
 ## Constractor
 
 * MHZ19_Serial  
-  notmal constractor. if you use this constractor, you must begin() function after this constractor.
+  normal constractor. if you use this constractor, you must execute begin() function after this constractor execute.
 
 * MHZ19_Serial(int rx, int tx)  
   setting rx and tx pin, and initialize Software Serial.
@@ -41,7 +41,8 @@ License MIT
   
 * void setAutoCalibration(bool autocalib)  
   MH-Z19 has automatic calibration procedure. the MH-Z19 executing automatic calibration, its do zero point(stable gas environment (400ppm)) judgement.
-  The automatic calibration cycle is every 24 hours after powered on.
+  The automatic calibration cycle is every 24 hours after powered on.  
+  If you use this sensor in door, you execute `setAutoCalibration(false)`.
 
 * void calibrateZero()  
   execute zero point calibration. 
