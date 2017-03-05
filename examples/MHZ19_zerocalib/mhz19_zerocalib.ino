@@ -7,18 +7,15 @@
 const int rx_pin = 4;  //Software Serial rx pin no
 const int tx_pin = 5;  //Software Serial tx pin no
 
-MHZ19_Serial mhz19;
-
 const int waitingMinutes = 30;  //waiting 30 minutes
 
+MHZ19_Serial mhz19;
 
 /*----------------------------------------------------------
     MH-Z19 CO2 sensor  setup
   ----------------------------------------------------------*/
 void setup() {
-
   Serial.begin(9600);
-
   mhz19.begin(rx_pin, tx_pin);
   mhz19.setAutoCalibration(false);
   while ( mhz19.isWarming() ) {
@@ -31,12 +28,10 @@ void setup() {
 /*----------------------------------------------------------
     MH-Z19 CO2 sensor  loop
   ----------------------------------------------------------*/
-
 long cnt = 0;
-long waitingSeconds = waitingMinutes * 60L;
+const long waitingSeconds = waitingMinutes * 60L;
 void loop() {
-  cnt ++;
-  if ( cnt % 60 == 0) {
+  if ( ++cnt % 60 == 0) {
     Serial.print(cnt / 60); Serial.println("min.");
     Serial.print("co2: "); Serial.print(mhz19.getPPM()); Serial.println("ppm now.");
   } else {
@@ -57,6 +52,8 @@ void loop() {
       Serial.print("co2: "); Serial.print(mhz19.getPPM()); Serial.println("ppm now.");
       delay(10000);
     }
+    cnt = 0;
+    return;
   }
 
 }

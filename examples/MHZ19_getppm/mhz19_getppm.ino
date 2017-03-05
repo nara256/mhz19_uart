@@ -14,7 +14,6 @@ MHZ19_Serial mhz19;
   ----------------------------------------------------------*/
 void setup() {
   Serial.begin(9600);
-
   mhz19.begin(rx_pin, tx_pin);
   mhz19.setAutoCalibration(false);
   while( mhz19.isWarming() ) {
@@ -27,7 +26,6 @@ void setup() {
     MH-Z19 CO2 sensor  loop
   ----------------------------------------------------------*/
 void loop() {
-
   int co2ppm = mhz19.getPPM();
   int temp = mhz19.getTemperature();
 
