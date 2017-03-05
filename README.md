@@ -8,7 +8,7 @@ License MIT
 # How to use
 
 * Include this library to your Arduino IDE.
-* Wireing MH-Z19 sensor to your Arduino or ESP-WROOM-02
+* Wiring MH-Z19 sensor to your Arduino or ESP-WROOM-02
 
     MH-Z19 Vout to Arduino Vin(5V)  
     MH-Z19 GND  to Arduino GND  
