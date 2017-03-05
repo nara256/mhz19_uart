@@ -2,11 +2,13 @@
   MHZ19_Serial.h - MH-Z19 CO2 sensor library for ESP-WROOM-02 ( esp8266 ) or Arduino
   version 0.2
   
-  
+  License MIT
 */
 
 #ifndef MHZ19_Serial_h_
 #define MHZ19_Serial_h_
+
+#include "Arduino.h"
 
 enum MHZ19_DATA { 
 	PPM, TEMPERATURE, STAT 
@@ -21,7 +23,7 @@ public:
 	~MHZ19_Serial();
 
 	void begin(int rx, int tx);
-	void setAutoCalibration(bool autocalib);
+	void setAutoCalibration(boolean autocalib);
 	void calibrateZero();
 	void calibrateSpan(int ppm);
 	
@@ -29,7 +31,7 @@ public:
 	int getTemperature();
 	int getStatus();
 	
-	bool isWarming();
+	boolean isWarming();
 
 protected:
 	void writeCommand(uint8_t com[]);
