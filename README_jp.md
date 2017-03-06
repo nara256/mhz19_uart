@@ -1,5 +1,5 @@
 # MHZ19_Serial  
-Arduino IDE 用の MH-Z19 二酸化炭素センサ用のライブラリです。  
+Arduino IDE 用の MH-Z19 二酸化炭素センサ用のライブラリです。   
 version 0.2
 
 # ライセンス  
@@ -10,7 +10,7 @@ License MIT
 * このライブラリを Arduino IDE にインクルードしてください。
 * MH-Z19 を Arduino や ESP-WROOM-02 にシリアル接続してください。
 
-    MH-Z19 Vout → Arduino Vin(5V)  
+    MH-Z19 Vout → Arduino Vout(5V)  
     MH-Z19 GND  → Arduino GND  
     MH-Z19 Tx   → Arduino Digital Pin (Software Serial の Rx ピン用)  ※ Arduino の Rx ピンには接続しないでください。  
     MH-Z19 Rx   → Arduino Digital Pin (Software Serial の Tx ピン用)  ※ Arduino の Tx ピンには接続しないでください。  
@@ -36,13 +36,13 @@ License MIT
 ## public関数
 
 * void begin(int rx, int tx)  
-  Rx/Txピンを設定する
+  使用するRx/Txピンを設定する
   
 * void setAutoCalibration(bool autocalib)  
+  この関数は、オートキャリブレーション機能を有効にするか無効にするかを設定します。
   MH-Z19 は、デフォルトで「オートキャリブレーション」機能が有効になっています。
   オートキャリブレーションが有効な場合、電源投入後24時間ごとに「ゼロキャリブレーション」（その時点の二酸化炭素濃度を「大気=400ppm」と判断すること）して、以後の数値を出力します。
   MH-Z19を屋外で使う場合は非常に有効な機能ですが、屋内で使う場合は迷惑な機能でしかありません。  
-  この関数は、オートキャリブレーション機能を有効にするか無効にするかを設定します。
  
 * void calibrateZero()  
   ゼロキャリブレーションを実施します。ゼロキャリブレーションは大気下での算出精度を高めるためのものです。
@@ -50,7 +50,7 @@ License MIT
 
 * void calibrateSpan(int ppm)  
   スパンキャリブレーションを実施します。スパンキャリブレーションは1000～2000ppm程度のもとでの算出精度を高めるためのものです。
-  ゼロキャリブレーションを実施する場合は、MH-Z19の電源を投入後、最低20分以上2000ppm程度（最低でも1000ppm以上）の環境で動作させ、その後この関数を実行してください。
+  スパンキャリブレーションを実施する場合は、MH-Z19の電源を投入後、最低20分以上2000ppm程度（少なくとも1000ppm以上）の環境で動作させ、その後この関数を実行してください。
   なお、1000ppm未満でこの関数を実行した場合、スパンキャリブレーションは実行されません。  
   また、スパンキャリブレーションを実行する前にゼロキャリブレーションを実施してください。
   

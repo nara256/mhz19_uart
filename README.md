@@ -10,7 +10,7 @@ License MIT
 * Include this library to your Arduino IDE.
 * Wiring MH-Z19 sensor to your Arduino or ESP-WROOM-02.
 
-    MH-Z19 Vout to Arduino Vin(5V)  
+    MH-Z19 Vout to Arduino Vout(5V)  
     MH-Z19 GND  to Arduino GND  
     MH-Z19 Tx   to Arduino Digital Pin (Software Serial Rx pin)  # do not connect Arduino Rx pin.  
     MH-Z19 Rx   to Arduino Digital Pin (Software Serial Tx pin)  # do not connect Arduino Tx pin.  
@@ -46,11 +46,11 @@ License MIT
 
 * void calibrateZero()  
   execute zero point calibration. 
-  if you want to execute zero calibration, the MH-Z19 sensor must work in stable gas environment (400ppm) for over 20 minutes and you execute this function.
+  if you want to execute zero point calibration, the MH-Z19 sensor must work in stable gas environment (400ppm) for over 20 minutes and you execute this function.
 
 * void calibrateSpan(int ppm)  
   execute span point calibration.
-  if you want to execute span calibration, the MH-Z19 sensor must work in between 1000 to 2000ppm level co2 for over 20 minutes and you execute this function.
+  if you want to execute span point calibration, the MH-Z19 sensor must work in between 1000 to 2000ppm level co2 for over 20 minutes and you execute this function.
   
 * int getPPM()  
   get co2 ppm.
