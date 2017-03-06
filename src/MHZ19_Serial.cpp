@@ -68,14 +68,13 @@ void MHZ19_Serial::writeCommand(uint8_t cmd[]) {
 	writeCommand(cmd,NULL);
 }
 
-void MHZ19_Serial::writeCommand(uint8_t cmd[], uint8_t response[] = NULL) {
+void MHZ19_Serial::writeCommand(uint8_t cmd[], uint8_t response[]) {
 	SoftwareSerial co2serial = SoftwareSerial( rx_pin, tx_pin );
 	co2serial.begin(9600);
-	uint8_t checksum = mhz19_checksum(cmd);
 	for (int i = 0; i < REQUEST_CNT; i++) {
 	    co2serial.write(cmd[i]);
 	}
-	co2serial.write(checksum);
+	co2serial.write(mhz19_checksum(cmd));
 	co2serial.flush();
 	
 	if (response != NULL) {
