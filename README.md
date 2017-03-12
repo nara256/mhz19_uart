@@ -21,9 +21,9 @@ License MIT
 
 # caution
 
-* MH-Z19 is supporting PWM , but this library is supporting only serial connection. 
+* MH-Z19 support PWM connection, but this library support only serial connection. 
 * this library is testing only ESP-WROOM-02(esp8266) boards. if you can't execute this library on your arduino (or clone) boards, please contact me.
-* _this library is not supporting ESP-WROOM-32(ESP32). because ESP32 doesn't have SoftwareSerial._ I'm rewriting source code now.
+* _this library do not support ESP-WROOM-32(ESP32). because ESP32 doesn't have SoftwareSerial._ I'm rewriting source code now.
 
 
 # MHZ19_Serial library function
