@@ -23,7 +23,7 @@ License MIT
 
 * MH-Z19 is supporting PWM , but this library is supporting only serial connection. 
 * this library is testing only ESP-WROOM-02(esp8266) boards. if you can't execute this library on your arduino (or clone) boards, please contact me.
-* _this library is not supported ESP-WROOM-32(ESP32). because ESP32 don't have SoftwareSerial._ I'm rewriting source code now.
+* _this library is not supporting ESP-WROOM-32(ESP32). because ESP32 doesn't have SoftwareSerial._ I'm rewriting source code now.
 
 
 # MHZ19_Serial library function
@@ -58,10 +58,10 @@ License MIT
   get co2 ppm.
   
 * int getTemperature()  
-  get temperature (MH-Z10 hiding function?  this function is not support.)
+  get temperature (MH-Z10 hiding function?  this function do not support.)
 
 * int getStatus()  
-  get ths MH-Z19 sensor status value (but I don't know what this value is. this function is not support, too.)
+  get ths MH-Z19 sensor status value (but I don't know what this value is. this function do not support, too.)
 
 * bool isWarming()  
   check the MH-Z19 sensor is warming up.
