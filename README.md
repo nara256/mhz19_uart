@@ -8,6 +8,7 @@ License MIT
 # How to use
 
 * Include this library to your Arduino IDE.
+
 * Wiring MH-Z19 sensor to your Arduino or ESP-WROOM-02.
 
     MH-Z19 Vout to Arduino Vout(5V)  
@@ -22,6 +23,7 @@ License MIT
 
 * MH-Z19 is supporting PWM , but this library is supporting only serial connection. 
 * this library is testing only ESP-WROOM-02(esp8266) boards. if you can't execute this library on your arduino (or clone) boards, please contact me.
+* _this library is not supported ESP-WROOM-32(ESP32). because ESP32 don't have SoftwareSerial._ I'm rewriting source code now.
 
 
 # MHZ19_Serial library function
