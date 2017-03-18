@@ -1,6 +1,6 @@
-# MHZ19_Serial 
-Arduino IDE library for operating the MH-Z19 CO2 sensor in ESP-WROOM-02(esp8266) or Arduino  
-version 0.2
+# MHZ19_uart 
+Arduino IDE library for operating the MH-Z19 CO2 sensor in ESP-WROOM-02/32(ESP8266/ESP32) or Arduino  
+version 0.3
 
 # Credits and license  
 License MIT
@@ -8,12 +8,12 @@ License MIT
 # How to use
 
 * Include this library to your Arduino IDE.
-* Wiring MH-Z19 sensor to your Arduino or ESP-WROOM-02.
+* Wiring MH-Z19 sensor to your Arduino or ESP-WROOM-02/32(ESP8266/ESP32).
 
     MH-Z19 Vout to Arduino Vout(5V)  
     MH-Z19 GND  to Arduino GND  
-    MH-Z19 Tx   to Arduino Digital Pin (Software Serial Rx pin)  # do not connect Arduino Rx pin.  
-    MH-Z19 Rx   to Arduino Digital Pin (Software Serial Tx pin)  # do not connect Arduino Tx pin.  
+    MH-Z19 Tx   to Arduino Digital Pin (Serial Rx pin)
+    MH-Z19 Rx   to Arduino Digital Pin (Serial Tx pin)
     other MH-Z19 pins are not used.  
 
 * Read sample source code. It's very simple !
@@ -21,17 +21,17 @@ License MIT
 # caution
 
 * MH-Z19 is supporting PWM , but this library is supporting only serial connection. 
-* this library is testing only ESP-WROOM-02(esp8266) boards. if you can't execute this library on your arduino (or clone) boards, please contact me.
+* this library is testing only ESP-WROOM-02/32(ESP8266/ESP32) boards. if you can't execute this library on your arduino (or clone) boards, please contact me.
 
 
-# MHZ19_Serial library function
+# MHZ19_uart library function
 
 ## Constractor
 
-* MHZ19_Serial  
+* MHZ19_uart  
   normal constractor. if you use this constractor, you must execute begin() function after this constractor execute.
 
-* MHZ19_Serial(int rx, int tx)  
+* MHZ19_uart(int rx, int tx)  
   setting rx and tx pin, and initialize Software Serial.
 
 ## public function
@@ -56,7 +56,7 @@ License MIT
   get co2 ppm.
   
 * int getTemperature()  
-  get temperature (MH-Z10 hiding function?  this function is not support.)
+  get temperature (MH-Z19 hidden function?  this function is not support.)
 
 * int getStatus()  
   get ths MH-Z19 sensor status value (but I don't know what this value is. this function is not support, too.)
@@ -71,3 +71,7 @@ License MIT
 * MH-Z19B Data sheet  
   http://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19b-co2-ver1_0.pdf
 
+# history
+* ver. 0.1: closed version.
+* ver. 0.2: first release version.
+* ver. 0.3: support ESP-WROOM-32(ESP32), Change library name. (MHZ19_Serial -> MHZ19_uart)

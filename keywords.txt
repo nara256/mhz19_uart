@@ -1,7 +1,7 @@
-MHZ19_Serial	KEYWORD1
+MHZ19_uart	KEYWORD1
+#
 begin	KEYWORD2
 setAutoCalibration	KEYWORD2
-calibrateZero	KEYWORD2
 calibrateZero	KEYWORD2
 calibrateSpan	KEYWORD2
 getPPM	KEYWORD2
