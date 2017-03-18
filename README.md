@@ -23,7 +23,6 @@ License MIT
 * MH-Z19 is supporting PWM , but this library is supporting only serial connection. 
 * this library is testing only ESP-WROOM-02/32(ESP8266/ESP32) boards. if you can't execute this library on your arduino (or clone) boards, please contact me.
 
-
 # MHZ19_uart library function
 
 ## Constractor
@@ -59,7 +58,7 @@ License MIT
   get temperature (MH-Z19 hidden function?  this function is not support.)
 
 * int getStatus()  
-  get ths MH-Z19 sensor status value (but I don't know what this value is. this function is not support, too.)
+  get ths MH-Z19 sensor status value (but I don't know what this value is. this function do not support, too.)
 
 * bool isWarming()  
   check the MH-Z19 sensor is warming up.
