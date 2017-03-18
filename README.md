@@ -12,8 +12,8 @@ License MIT
 
     MH-Z19 Vout to Arduino Vout(5V)  
     MH-Z19 GND  to Arduino GND  
-    MH-Z19 Tx   to Arduino Digital Pin (Serial Rx pin)
-    MH-Z19 Rx   to Arduino Digital Pin (Serial Tx pin)
+    MH-Z19 Tx   to Arduino Digital Pin (Serial Rx pin)  
+    MH-Z19 Rx   to Arduino Digital Pin (Serial Tx pin)  
     other MH-Z19 pins are not used.  
 
 * Read sample source code. It's very simple !

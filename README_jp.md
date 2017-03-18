@@ -12,8 +12,8 @@ License MIT
 
     MH-Z19 Vout → Arduino Vout(5V)  
     MH-Z19 GND  → Arduino GND  
-    MH-Z19 Tx   → Arduino Digital Pin (Serial の Rx ピン用)
-    MH-Z19 Rx   → Arduino Digital Pin (Serial の Tx ピン用)
+    MH-Z19 Tx   → Arduino Digital Pin (Serial の Rx ピン用)  
+    MH-Z19 Rx   → Arduino Digital Pin (Serial の Tx ピン用)  
     MH-Z19 の他のピンは使用しません。  
 
 * Arduino IDE からスケッチ例を参照してください。
