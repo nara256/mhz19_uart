@@ -4,8 +4,8 @@
 
 #include <MHZ19_uart.h>
 
-const int rx_pin = 4;  //Serial rx pin no
-const int tx_pin = 5;  //Serial tx pin no
+const int rx_pin = 16;	//Serial rx pin no
+const int tx_pin = 17;	//Serial tx pin no
 
 const int waitingMinutes = 30;  //waiting 30 minutes
 
@@ -19,10 +19,8 @@ void setup() {
   mhz19.begin(rx_pin, tx_pin);
 
   mhz19.setAutoCalibration(false);
-  while ( mhz19.isWarming() ) {
-    Serial.print("MH-Z19 now warming up...  status:"); Serial.println(mhz19.getStatus());
-    delay(1000);
-  }
+  Serial.println("MH-Z19 is warming up now.");
+  delay(20 * 1000); //
   Serial.println();
 }
 
@@ -34,7 +32,7 @@ long avg_sum = 0L;
 const long waitingSeconds = waitingMinutes * 60L;
 void loop() {
   if ( ++cnt % 60 == 0) {
-    int ppm = mhz19.getPPM();
+    int ppm = mhz19.getCO2PPM();
     avg_sum += (long)ppm;
     Serial.print(cnt / 60); Serial.println("min.");
     Serial.print("co2: "); Serial.print(ppm); Serial.println("ppm now.");
@@ -58,7 +56,7 @@ void loop() {
     Serial.println("span calibration now .");
 
     for ( int i = 0; i < 10; i++) {
-      Serial.print("co2: "); Serial.print(mhz19.getPPM()); Serial.println("ppm now.");
+      Serial.print("co2: "); Serial.print(mhz19.getCO2PPM()); Serial.println("ppm now.");
       delay(10000);
     }
     cnt = 0;
