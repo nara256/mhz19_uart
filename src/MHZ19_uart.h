@@ -33,6 +33,13 @@ public:
 	void setHardwareSerialNo(int serialNo);
 #endif
 
+	//deprecated
+	int getPPM();
+	//deprecated
+	int getStatus();
+	//deprecated
+	boolean isWarming();
+
 protected:
 	void writeCommand(uint8_t com[]);
 	void writeCommand(uint8_t com[], uint8_t response[]);

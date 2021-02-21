@@ -145,3 +145,20 @@ uint8_t MHZ19_uart::mhz19_checksum(uint8_t com[])
 	sum = 0xff - sum + 0x01;
 	return sum;
 }
+
+//deprecated
+int MHZ19_uart::getPPM()
+{
+	return getCO2PPM();
+}
+//deprecated
+int MHZ19_uart::getStatus()
+{
+	return 0;
+}
+//deprecated
+boolean MHZ19_uart::isWarming()
+{
+	delay(10 * 1000);
+	return true;
+}
