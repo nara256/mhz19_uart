@@ -1,6 +1,6 @@
 # MHZ19_uart 
 Arduino IDE library for operating the MH-Z19 CO2 sensor in ESP-WROOM-02/32(ESP8266/ESP32) or Arduino  
-version 0.3
+version 0.31
 
 # Credits and license  
 License MIT
@@ -36,7 +36,10 @@ License MIT
 ## public function
 
 * void begin(int rx, int tx)  
-  setting rx and tx pin, and initialize Software Serial.
+  setting rx and tx pin, and initialize Serial.
+
+* void setHardwareSerialNo(int serialNo)  
+  setting hardware serial no. # You can use this function only ESP32.
   
 * void setAutoCalibration(bool autocalib)  
   MH-Z19 has automatic calibration procedure. the MH-Z19 executing automatic calibration, its do zero point(stable gas environment (400ppm)) judgement.
@@ -51,17 +54,11 @@ License MIT
   execute span point calibration.
   if you want to execute span point calibration, the MH-Z19 sensor must work in between 1000 to 2000ppm level co2 for over 20 minutes and you execute this function.
   
-* int getPPM()  
+* int getCO2PPM()  
   get co2 ppm.
   
 * int getTemperature()  
   get temperature (MH-Z19 hidden function?  this function is not support.)
-
-* int getStatus()  
-  get ths MH-Z19 sensor status value (but I don't know what this value is. this function do not support, too.)
-
-* bool isWarming()  
-  check the MH-Z19 sensor is warming up.
 
 # link
 * MH-Z19 Data sheet  
@@ -70,7 +67,12 @@ License MIT
 * MH-Z19B Data sheet  
   http://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19b-co2-ver1_0.pdf
 
+* MH-Z19C Data sheet  
+  https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19c-pins-type-co2-manual-ver1_0.pdf
+
 # history
 * ver. 0.1: closed version.
 * ver. 0.2: first release version.
 * ver. 0.3: support ESP-WROOM-32(ESP32), Change library name. (MHZ19_Serial -> MHZ19_uart)
+* ver. 0.31: Operation check on MH-Z19C, Delete functions getStatus() and isWarming(), And refactor details.
+

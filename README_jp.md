@@ -1,6 +1,6 @@
 # MHZ19_uart
 Arduino IDE 用の MH-Z19 二酸化炭素センサ用のライブラリです。   
-version 0.3
+version 0.31
 
 # ライセンス  
 License MIT
@@ -38,6 +38,9 @@ License MIT
 * void begin(int rx, int tx)  
   使用するRx/Txピン番号を設定する。
 
+* void setHardwareSerialNo(int serialNo)  
+  使用するHardwareSerialを指定する(0-2) ※ESP32でのみ使用可
+
 * void setAutoCalibration(bool autocalib)  
   この関数は、オートキャリブレーション機能を有効にするか無効にするかを設定します。
   MH-Z19 は、デフォルトで「オートキャリブレーション」機能が有効になっています。
@@ -54,17 +57,11 @@ License MIT
   なお、1000ppm未満でこの関数を実行した場合、スパンキャリブレーションは実行されません。  
   また、スパンキャリブレーションを実行する前にゼロキャリブレーションを実施してください。
   
-* int getPPM()  
+* int getCO2PPM()  
   現在の二酸化炭素濃度(ppm)を取得します。
   
 * int getTemperature()  
   現在の温度（℃）を取得します。（MH-Z19の隠し機能？のため動作保証はしません。また、取得できる値は整数値であるため精度はイマイチです。）
-
-* int getStatus()  
-  現在のステータス値を取得します。なお、ステータス値が何を意味するのかはデータシートにも記載がないため、詳細は不明です。（0=開始中、1=暖機中、64=通常動作中、らしい）
-
-* bool isWarming()  
-  MH-Z19センサが暖機中かを確認します。
 
 # リンク
 * MH-Z19 Data sheet  
@@ -73,13 +70,11 @@ License MIT
 * MH-Z19B Data sheet  
   http://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19b-co2-ver1_0.pdf
 
+* MH-Z19C Data sheet  
+  https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19c-pins-type-co2-manual-ver1_0.pdf
+
 # history
 * ver. 0.1: 非公開
 * ver. 0.2: 初回公開
 * ver. 0.3: ESP-WROOM-32対応, ライブラリ名変更(MHZ19_Serial→MHZ19_uart)
-
-#メモ
-* SoftwareSerial を使っていたコードを ESP32 に対応させる場合  
-  - 基本的には、SoftwareSerialをHardwareSerialに置き換えれば動作します。ESP32にはUART_NOが0～2までありますが、1を使うのが都合良いようです（理由は不明）。
-  - writeした直後に結果をreadする場合、少しdelay(20～100msecくらい)を置かないとread出来ないようです。  
-    基本は available() を呼び出して read できるようになるまで待つように実装するのが良いようです。
+* ver. 0.31: MH-Z19Cで動作確認, getStatus(), isWarming()関数を削除, getPPM()関数名を変更(getCO2PPM), その他リファクタリング
