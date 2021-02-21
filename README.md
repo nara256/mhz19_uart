@@ -31,7 +31,7 @@ License MIT
   normal constractor. if you use this constractor, you must execute begin() function after this constractor execute.
 
 * MHZ19_uart(int rx, int tx)  
-  setting rx and tx pin, and initialize Software Serial.
+  setting rx and tx pin, and initialize Serial.
 
 ## public function
 

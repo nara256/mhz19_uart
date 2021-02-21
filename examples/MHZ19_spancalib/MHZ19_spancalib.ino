@@ -4,17 +4,18 @@
 
 #include <MHZ19_uart.h>
 
-const int rx_pin = 16;	//Serial rx pin no
-const int tx_pin = 17;	//Serial tx pin no
+const int rx_pin = 16; //Serial rx pin no
+const int tx_pin = 17; //Serial tx pin no
 
-const int waitingMinutes = 30;  //waiting 30 minutes
+const int waitingMinutes = 30; //waiting 30 minutes
 
 MHZ19_uart mhz19;
 
 /*----------------------------------------------------------
     MH-Z19 CO2 sensor  setup
   ----------------------------------------------------------*/
-void setup() {
+void setup()
+{
   Serial.begin(9600);
   mhz19.begin(rx_pin, tx_pin);
 
@@ -30,21 +31,31 @@ void setup() {
 long cnt = 0;
 long avg_sum = 0L;
 const long waitingSeconds = waitingMinutes * 60L;
-void loop() {
-  if ( ++cnt % 60 == 0) {
+void loop()
+{
+  if (++cnt % 60 == 0)
+  {
     int ppm = mhz19.getCO2PPM();
     avg_sum += (long)ppm;
-    Serial.print(cnt / 60); Serial.println("min.");
-    Serial.print("co2: "); Serial.print(ppm); Serial.println("ppm now.");
-  } else {
+    Serial.print(cnt / 60);
+    Serial.println("min.");
+    Serial.print("co2: ");
+    Serial.print(ppm);
+    Serial.println("ppm now.");
+  }
+  else
+  {
     Serial.print(".");
   }
   delay(1000);
 
-  if (cnt > waitingSeconds) {
+  if (cnt > waitingSeconds)
+  {
     long avg = avg_sum / waitingMinutes;
-    if (avg < 1000) {
-      Serial.print("CO2 Avg. :");Serial.println(avg);
+    if (avg < 1000)
+    {
+      Serial.print("CO2 Avg. :");
+      Serial.println(avg);
       Serial.println("Can't Span point calibration because CO2 average is lower than 1000ppm");
       cnt = 0;
       avg_sum = 0L;
@@ -55,13 +66,14 @@ void loop() {
     mhz19.calibrateSpan(avg);
     Serial.println("span calibration now .");
 
-    for ( int i = 0; i < 10; i++) {
-      Serial.print("co2: "); Serial.print(mhz19.getCO2PPM()); Serial.println("ppm now.");
+    for (int i = 0; i < 10; i++)
+    {
+      Serial.print("co2: ");
+      Serial.print(mhz19.getCO2PPM());
+      Serial.println("ppm now.");
       delay(10000);
     }
     cnt = 0;
     avg_sum = 0L;
   }
-
 }
-
