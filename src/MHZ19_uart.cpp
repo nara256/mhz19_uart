@@ -23,18 +23,10 @@ MHZ19_uart::MHZ19_uart(int rx, int tx){
 MHZ19_uart::~MHZ19_uart(){
 }
 
-#ifdef ARDUINO_ARCH_ESP32
-void MHZ19_uart::begin(int rx, int tx, int s){
-	_rx_pin = rx;
-	_tx_pin = tx;
-	_serialno = s;
-}
-#else
 void MHZ19_uart::begin(int rx, int tx){
 	_rx_pin = rx;
 	_tx_pin = tx;
 }
-#endif
 
 void MHZ19_uart::setAutoCalibration(boolean autocalib){
 	writeCommand( autocalib ? autocalib_on : autocalib_off );
@@ -56,21 +48,21 @@ void MHZ19_uart::calibrateSpan(int ppm) {
 	writeCommand( com );
 }
 
-int MHZ19_uart::getPPM() {
-	return getSerialData(PPM);
+int MHZ19_uart::getCO2PPM() {
+	readSerialData();
+	return _co2;
 }
 
 int MHZ19_uart::getTemperature() {
-	return getSerialData(TEMPERATURE);
+	readSerialData();
+	return _co2temp;
 }
 
-int MHZ19_uart::getStatus() {
-	return getSerialData(STAT);
+#ifdef ARDUINO_ARCH_ESP32
+void MHZ19_uart::setHardwareSerialNo(int serialNo) {
+	_serialNo = serialNo;
 }
-
-boolean MHZ19_uart::isWarming(){
-	return (getStatus() <=1);
-}
+#endif
 
 //protected
 void MHZ19_uart::writeCommand(uint8_t cmd[]) {
@@ -79,12 +71,12 @@ void MHZ19_uart::writeCommand(uint8_t cmd[]) {
 
 void MHZ19_uart::writeCommand(uint8_t cmd[], uint8_t* response) {
 #ifdef ARDUINO_ARCH_ESP32
-	HardwareSerial hserial(_serialno);
+	HardwareSerial hserial(_serialNo);
 	hserial.begin(9600, SERIAL_8N1, _rx_pin, _tx_pin);
 #else
 	SoftwareSerial hserial(_rx_pin, _tx_pin);
-	hserial.begin(9600);
 #endif
+	hserial.begin(9600);
     hserial.write(cmd, REQUEST_CNT);
 	hserial.write(mhz19_checksum(cmd));
 	hserial.flush();
@@ -107,36 +99,23 @@ void MHZ19_uart::writeCommand(uint8_t cmd[], uint8_t* response) {
 
 //private
 
-int MHZ19_uart::getSerialData(MHZ19_DATA flg) {
+void MHZ19_uart::readSerialData() {
 	uint8_t buf[MHZ19_uart::RESPONSE_CNT];
 	for( int i=0; i<MHZ19_uart::RESPONSE_CNT; i++){
 		buf[i]=0x0;
 	}
 
 	writeCommand(getppm, buf);
-	int co2 = 0, co2temp = 0, co2status =  0;
 
 	// parse
 	if (buf[0] == 0xff && buf[1] == 0x86 && mhz19_checksum(buf) == buf[MHZ19_uart::RESPONSE_CNT-1]) {
-		co2 = buf[2] * 256 + buf[3];
-		co2temp = buf[4] - 40;
-		co2status =  buf[5];
+		_co2 = buf[2] * 256 + buf[3];
+		_co2temp = buf[4] - 40;
+		_co2status =  buf[5];
 	} else {
-		co2 = co2temp = co2status = -1;
+		_co2 = _co2temp = _co2status = -1;
 	}
 
-	switch(flg) {
-		case MHZ19_DATA::TEMPERATURE:
-			return co2temp;
-			break;
-		case MHZ19_DATA::STAT:
-			return co2status;
-			break;
-		case MHZ19_DATA::PPM:
-		default:
-			return co2;
-			break;
-	}
 }	
 
 uint8_t MHZ19_uart::mhz19_checksum( uint8_t com[] ) {

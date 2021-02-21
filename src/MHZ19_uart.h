@@ -15,10 +15,6 @@
 	#include "SoftwareSerial.h"
 #endif
 
-enum MHZ19_DATA { 
-	PPM, TEMPERATURE, STAT 
-};
-
 class MHZ19_uart
 {
 public:
@@ -26,20 +22,17 @@ public:
 	MHZ19_uart(int rx, int tx);
 	virtual ~MHZ19_uart();
 
-#ifdef ARDUINO_ARCH_ESP32
-	void begin(int rx=-1, int tx=-1, int s=1);
-#else
 	void begin(int rx=-1, int tx=-1);
-#endif
 	void setAutoCalibration(boolean autocalib);
 	void calibrateZero();
 	void calibrateSpan(int ppm);
 	
-	int getPPM();
+	int getCO2PPM();
 	int getTemperature();
-	int getStatus();
-	
-	boolean isWarming();
+#ifdef ARDUINO_ARCH_ESP32
+	void setHardwareSerialNo(int serialNo);
+#endif
+
 
 protected:
 	void writeCommand(uint8_t com[]);
@@ -47,10 +40,14 @@ protected:
 
 private:
 	uint8_t mhz19_checksum( uint8_t com[] );
-	int getSerialData(MHZ19_DATA flg);
+	void readSerialData();
 
 	static const int REQUEST_CNT = 8;
 	static const int RESPONSE_CNT = 9;
+
+	int _co2 = 0;
+	int _co2temp = 0;
+	int _co2status =  0;
 
 	// serial command
 	uint8_t getppm[REQUEST_CNT]			= {0xff, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -58,11 +55,11 @@ private:
 	uint8_t spancalib[REQUEST_CNT]	 	= {0xff, 0x01, 0x88, 0x00, 0x00, 0x00, 0x00, 0x00};
 	uint8_t autocalib_on[REQUEST_CNT] 	= {0xff, 0x01, 0x79, 0xA0, 0x00, 0x00, 0x00, 0x00};
 	uint8_t autocalib_off[REQUEST_CNT]	= {0xff, 0x01, 0x79, 0x00, 0x00, 0x00, 0x00, 0x00};
-#ifdef ARDUINO_ARCH_ESP32
-	int _serialno = 1;
-#endif
 	int _rx_pin = -1;
 	int _tx_pin = -1;
+#ifdef ARDUINO_ARCH_ESP32
+	int _serialNo = 2;
+#endif
 };
 
 #endif
