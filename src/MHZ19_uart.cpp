@@ -87,8 +87,8 @@ void MHZ19_uart::writeCommand(uint8_t cmd[], uint8_t *response)
 	hserial.begin(9600, SERIAL_8N1, _rx_pin, _tx_pin);
 #else
 	SoftwareSerial hserial(_rx_pin, _tx_pin);
-#endif
 	hserial.begin(9600);
+#endif
 	hserial.write(cmd, REQUEST_CNT);
 	hserial.write(mhz19_checksum(cmd));
 	hserial.flush();
@@ -106,7 +106,6 @@ void MHZ19_uart::writeCommand(uint8_t cmd[], uint8_t *response)
 			yield();
 			delay(WAIT_READ_DELAY);
 		}
-		//Serial.println(String("debug:")+String(i));
 		hserial.readBytes(response, MHZ19_uart::RESPONSE_CNT);
 	}
 }
