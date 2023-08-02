@@ -1,11 +1,13 @@
 /*----------------------------------------------------------
     MH-Z19 CO2 sensor  SAMPLE
   ----------------------------------------------------------*/
-
 #include <MHZ19_uart.h>
 
-const int rx_pin = 16; //Serial rx pin no
-const int tx_pin = 17; //Serial tx pin no
+#define rxPin 9
+#define txPin 10
+
+const int rx_pin = rxPin; //Serial rx pin no
+const int tx_pin = txPin; //Serial tx pin no
 
 MHZ19_uart mhz19;
 
@@ -14,6 +16,9 @@ MHZ19_uart mhz19;
   ----------------------------------------------------------*/
 void setup()
 {
+  pinMode(rxPin, INPUT);
+  pinMode(txPin, OUTPUT);
+
   Serial.begin(9600);
   mhz19.begin(rx_pin, tx_pin);
   mhz19.setAutoCalibration(false);
